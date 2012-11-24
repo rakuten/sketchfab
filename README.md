@@ -1,3 +1,4 @@
+# Sketchfab Publisher
 This project consists of a publisher to sketchfab for 3D models made in 3dsMax.
 Sketchfab is a service which displays 3D models in a browser. Sketchfab runs on webGL technology.
 3dsMax is a digital content creation package in which a user can create 3D models.
