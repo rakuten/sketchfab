@@ -67,7 +67,7 @@ struct colladaStruct
 		deleteFile sketchfab.collada.iniPreset
 		
 		--copy the native preset to the local machine
-		local boolCopySuccess = copyFile (sketchfab.scriptpath + "/opencollada_preset_sketchfab.ini") sketchfab.collada.iniPreset 
+		local boolCopySuccess = copyFile (sketchfab.scriptpath + "/presets/opencollada_preset_sketchfab.ini") sketchfab.collada.iniPreset 
 	),
 	
 	function fn_insertSketchfabColladaExportPreset =

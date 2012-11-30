@@ -111,7 +111,7 @@ struct str_obj
 		deleteFile sketchfab.obj.iniSettings
 		
 		--copy the native preset to the local machine
-		local boolCopySuccess = copyFile (sketchfab.scriptpath + "/obj_preset_sketchfab.ini") sketchfab.obj.iniSettings 
+		local boolCopySuccess = copyFile (sketchfab.scriptpath + "/presets/obj_preset_sketchfab.ini") sketchfab.obj.iniSettings 
 	),
 	
 	function fn_insertSketchfabObjExportPreset =

@@ -1,0 +1,27 @@
+name "Sketchfab"
+description "Klaas Nienhuis Scripts"
+version 7
+
+copy "scriptfiles\sketchfab.ms" to "$userScripts\KlaasTools\Sketchfab\scriptfiles\"
+copy "scriptfiles\sketchfab_dae.ms" to "$userScripts\KlaasTools\Sketchfab\scriptfiles\"
+copy "scriptfiles\sketchfab_errorHandling.ms" to "$userScripts\KlaasTools\Sketchfab\scriptfiles\"
+copy "scriptfiles\sketchfab_gui.ms" to "$userScripts\KlaasTools\Sketchfab\scriptfiles\"
+copy "scriptfiles\sketchfab_htmlPost.ms" to "$userScripts\KlaasTools\Sketchfab\scriptfiles\"
+copy "scriptfiles\sketchfab_multithread.ms" to "$userScripts\KlaasTools\Sketchfab\scriptfiles\"
+copy "scriptfiles\sketchfab_obj.ms" to "$userScripts\KlaasTools\Sketchfab\scriptfiles\"
+copy "scriptfiles\sketchfab_rolloutFunctions.ms" to "$userScripts\KlaasTools\Sketchfab\scriptfiles\"
+copy "scriptfiles\sketchfab_token.ms" to "$userScripts\KlaasTools\Sketchfab\scriptfiles\"
+copy "scriptfiles\sketchfab_zip.ms" to "$userScripts\KlaasTools\Sketchfab\scriptfiles\"
+copy "art\sketchfabBanner_007.jpg" to "$userScripts\KlaasTools\Sketchfab\art\"
+copy "art\sketchfab_16i.bmp" to "$userIcons\"
+copy "art\sketchfab_24i.bmp" to "$userIcons\"
+copy "art\sketchfab_24i.ico" to "$userIcons\"
+copy "installfiles\KlaasNienhuis_Sketchfab_Install.ms" to "$userScripts\KlaasTools\Sketchfab\"
+copy "presets\obj_preset_sketchfab.ini" to "$userScripts\KlaasTools\Sketchfab\presets\"
+copy "presets\opencollada_preset_sketchfab.ini" to "$userScripts\KlaasTools\Sketchfab\presets\"
+
+drop $userScripts\KlaasTools\Sketchfab\KlaasNienhuis_Sketchfab_Install.ms
+
+run $userScripts\KlaasTools\Sketchfab\KlaasNienhuis_Sketchfab_Install.ms
+
+clear temp on MAX exit

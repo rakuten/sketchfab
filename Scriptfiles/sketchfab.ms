@@ -91,11 +91,12 @@ Changelog:
 </SCRIPTFILE>
 *******************************************************************************************************/
 (
-	try(closeRolloutFloater  sketchfab.gui.floater)catch() --kill any previously created dialog
+	try(closeRolloutFloater sketchfab.gui.floater)catch() --kill any previously created dialog
 	
-	local basePath = "//STRATUS/data/SketchfabExporter/Scripts/Version_07" --developing location1
+-- 	local basePath = "//STRATUS/data/SketchfabExporter/Scripts/Version_07" --developing location1
 -- 	local basePath = "C:\Documents and Settings\klaas\My Documents\Downloads\Version_07\Version_07" --developing location2
--- 	local basePath = (getDir #userscripts) + "/KlaasTools/Sketchfab" --publishing location
+-- 	local basepath = @"N:\GitHub\sketchfab"
+	local basePath = (getDir #userscripts) + "/KlaasTools/Sketchfab" --publishing location
 	
 	struct str_sketchfab
 	(
@@ -122,7 +123,7 @@ Changelog:
 		zipFilePath = undefined,
 		url= "https://api.sketchfab.com/v1/models",
 		guiIni =  basePath + "/rolloutSettings.ini", --settings regarding the gui
-		thumbnailPath =  basePath + "/sketchfabBanner_007.jpg",
+		thumbnailPath =  basePath + "/art/sketchfabBanner_007.jpg",
 		startTime = undefined,
 
 		chainThreads = true, --if set to true, all threads are executed one after another. If set to false, each thread needs to be executed individually

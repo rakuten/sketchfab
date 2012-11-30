@@ -110,7 +110,7 @@ Changelog:
 					
 					--create the export-preset
 					sketchfab.obj.fn_insertSketchfabObjExportPreset()
-					sketchfab.collada.fn_insertSketchfabColladaExportPreset()
+-- 					sketchfab.collada.fn_insertSketchfabColladaExportPreset()
 				)
 				
 				on ddlExporter selected arg do
