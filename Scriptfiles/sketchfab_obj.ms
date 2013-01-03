@@ -84,14 +84,13 @@ struct str_obj
 			setINISetting sketchfab.obj.iniPresets "ExportPresets" "PresetNames" strPresetList
 			
 			--add all settings from the preset in the objPreset struct to the ini-file
-			setINISetting sketchfab.obj.iniPresets sketchfab.obj.presetName "ID" ((strPresetList.count-1)  as string) --add an ID to the preset. It's at the end of the list
+			setINISetting sketchfab.obj.iniPresets sketchfab.obj.presetName "ID" (((getINISetting sketchfab.obj.iniPresets).count-1)  as string) --add an ID to the preset. It's at the end of the list
 			local arrSection = getINISetting (sketchfab.scriptpath + "/obj_preset_sketchfab.ini")
 			for s in arrSection where s != "General" do
 			(
 				local arrPropNames = getINISetting (sketchfab.scriptpath + "/obj_preset_sketchfab.ini") s
 				for p in arrPropNames do setINISetting sketchfab.obj.iniPresets sketchfab.obj.presetName p (getINISetting (sketchfab.scriptpath + "/obj_preset_sketchfab.ini") s p)
 			)
-			
 		)
 		
 		--edit the gw_objexp file to use this new preset
