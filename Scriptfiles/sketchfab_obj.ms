@@ -85,11 +85,11 @@ struct str_obj
 			
 			--add all settings from the preset in the objPreset struct to the ini-file
 			setINISetting sketchfab.obj.iniPresets sketchfab.obj.presetName "ID" (((getINISetting sketchfab.obj.iniPresets).count-1)  as string) --add an ID to the preset. It's at the end of the list
-			local arrSection = getINISetting (sketchfab.scriptpath + "/obj_preset_sketchfab.ini")
+			local arrSection = getINISetting (sketchfab.scriptpath + "/presets/obj_preset_sketchfab.ini")
 			for s in arrSection where s != "General" do
 			(
-				local arrPropNames = getINISetting (sketchfab.scriptpath + "/obj_preset_sketchfab.ini") s
-				for p in arrPropNames do setINISetting sketchfab.obj.iniPresets sketchfab.obj.presetName p (getINISetting (sketchfab.scriptpath + "/obj_preset_sketchfab.ini") s p)
+				local arrPropNames = getINISetting (sketchfab.scriptpath + "/presets/obj_preset_sketchfab.ini") s
+				for p in arrPropNames do setINISetting sketchfab.obj.iniPresets sketchfab.obj.presetName p (getINISetting (sketchfab.scriptpath + "/presets/obj_preset_sketchfab.ini") s p)
 			)
 		)
 		
