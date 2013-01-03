@@ -7,7 +7,7 @@ Sketchfab is a service which displays 3D models in a browser. Sketchfab runs on 
 
 This publisher has been written in maxscript, the native scripting language in 3dsMax. The code has been created and tested in 3dsMax 2012.
 
-Tutorials and articles on [klaasnienhuis.nl] (www.klaasnienhuis.nl)
+Tutorials and articles on [klaasnienhuis.nl] (http://www.klaasnienhuis.nl)
 
 ## License
 
