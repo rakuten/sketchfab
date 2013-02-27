@@ -26,6 +26,7 @@ Changelog:
 	2012-10-16: adjusted the posting-process to reflect teh new api. No more json or base64. Now it's a html file-post.
 	2012-10-17: adjusted fn_parseResponse to be able to parse the repsonse according to the new api
 	2012-10-19: added the source-parameter
+	2013-02-27: added error-checks for firewall (assumption), proxy and acces error
 </SCRIPTFILE>
 *******************************************************************************************************/
 
@@ -103,7 +104,14 @@ Changelog:
 			req.ContentLength = formBytes.count + fileHeaderBytes.count + theEnd + trailingBytes.count
 			
 			--write bytes to the requeststream
-			local reqStream = req.GetRequestStream() --open the requeststream
+			local reqStream
+			--open the requeststream
+			try(reqStream = req.GetRequestStream())catch
+			(
+				--if the line above creates an error, it's a solid indication a firewall blocks outgoing traffic.
+				sketchfab.gui.fn_updateProgress 0 1 theMessage:"Couldn't connect, check firewall"
+				return undefined
+			)
 			reqStream.write formBytes 0 formBytes.count --write the key-value pair
 			reqStream.write fileHeaderBytes 0 fileHeaderBytes.count --write the key-value pair
 
@@ -137,8 +145,29 @@ Changelog:
 
 			reqStream.flush()
 			reqStream.Close()
-			local myResponse
-			try(myResponse = req.GetResponse())catch(sketchfab.error.scriptError message:"Webrequest couldn't be sent")
+			
+			local myResponse = undefined
+			try(myResponse = req.GetResponse())catch
+			(
+				--these are some of the expected errors, we don't need to generate error-reports and the script doesn't need to crash
+				local myException = getCurrentException()
+				case of
+				(
+					(matchpattern myException pattern:"*407*"): 
+					(
+						myResponse = undefined
+						sketchfab.gui.fn_updateProgress 0 1 theMessage:"Proxy error, please check network"
+					)
+					(matchpattern myException pattern:"*403*"): 
+					(
+						myResponse = undefined
+						sketchfab.gui.fn_updateProgress 0 1 theMessage:"Couldn't authenticate, please check token."
+					)
+					default: sketchfab.error.scriptError message:"Webrequest couldn't be sent"
+				)
+				
+				
+			)
 			
 			sketchfab.gui.roll_sketchfab.pgbUpload.value = 0
 			
