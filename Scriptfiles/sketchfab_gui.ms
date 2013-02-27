@@ -24,6 +24,8 @@ Changelog:
 	2012-10-18: replaced the standard progressbar with an only slightly better looking dotnet one
 	2012-10-19: added the source-parameter
 	2012-10-23: removed the devexpress button due to compatibility issues with max 2010
+	2013-02-27: added check for empty token
+	2013-02-27: new gamma setting for the banner
 </SCRIPTFILE>
 *******************************************************************************************************/
 
@@ -35,6 +37,34 @@ Changelog:
 		roll_token,
 		floater = undefined,
 		ToolTipObj = dotnetobject "System.Windows.Forms.ToolTip",
+		
+		function fn_updateProgress theProgress theMax theMessage:undefined =
+		(
+			/*<FUNCTION>
+			Description:
+				Update the progressbar and display a message.
+			Arguments:
+				<int/float> theProgress: the progress we're at.
+				<int/float> theMax: the maximum value
+				<string> theMessage: the message to be displayed, if undefine, the message isn't altered
+			Return:
+			</FUNCTION>*/
+
+			if hasproperty sketchfab.gui.roll_sketchfab.pgbUpload "value" == true do --check this if the progressbar still exists. Multithreading allows the user to close the dialog when it's still uploading stuff
+			(
+				--update the progress
+				local theProgress = ((theProgress as float)/(theMax as float))*100.0
+				sketchfab.gui.roll_sketchfab.pgbUpload.value = theProgress
+				
+				--update the message
+				if theMessage != undefined do
+				(
+					sketchfab.gui.roll_sketchfab.wwwSketchfab.caption = theMessage
+-- 					augmentedev.gui.roll_augmentedev.lblMessage.caption = theMessage
+-- 					augmentedev.gui.roll_augmentedev.lblMessage2.text = theMessage
+				)
+			)
+		),
 		
 		function fn_defineRollouts =
 		(
@@ -102,9 +132,12 @@ Changelog:
 						if index != 0 do sketchfab.gui.roll_sketchfab.ddlExporter.selection = index
 					)
 					
+					
 					--create the banner
+					local myGamma = 2.2
+					if IDisplayGamma.colorCorrectionMode == #gamma do myGamma = fileInGamma/displayGamma --this calculation results in the correct gamma for the banner
 					local bmpBanner = openbitmap sketchfab.thumbnailPath
-					local guiImage = bitmap bmpBanner.width bmpBanner.height gamma:(2.2)--this is the image we're outputting our screengrab to
+					local guiImage = bitmap bmpBanner.width bmpBanner.height gamma:myGamma--this is the image we're outputting our screengrab to
 					pasteBitmap bmpBanner guiImage [0,0] [0,0] --crop the screengrab
 					imgGrab.bitmap = guiImage
 					
@@ -148,7 +181,8 @@ Changelog:
 					(
 						(sketchfab.gui.roll_sketchfab.txtTitle_save.text == ""): messagebox "Please fill in a title" title:"No title present"
 						(selection.count == 0): messagebox "Please select some objects" title:"No selection active"
-						(sketchfab.gui.roll_sketchfab.imgGrab.bitmap == undefined): messagebox "Please create a thumbnail" title:"No thumbnail present"
+						(sketchfab.gui.roll_token.txtToken.text == ""): messagebox "Please enter a token, get it from your sketchfab account" title:"No token entered"
+-- 						(sketchfab.gui.roll_sketchfab.imgGrab.bitmap == undefined): messagebox "Please create a thumbnail" title:"No thumbnail present"
 						default: 
 						(
 							--diagnostics code
@@ -159,7 +193,7 @@ Changelog:
 							--store variables which need to be posted to the server
 							sketchfab.htmlpost.title = sketchfab.gui.roll_sketchfab.txtTitle_save.text
 							sketchfab.htmlpost.description = sketchfab.gui.roll_TagDescription.txtDescription_save.text
-							sketchfab.htmlpost.tags = sketchfab.gui.roll_TagDescription.txtTags_save.text
+							sketchfab.htmlpost.tags = sketchfab.gui.roll_TagDescription.txtTags_save.text + " 3dsMaxPublisher" --add my own tag
 							sketchfab.htmlpost.isPrivate = sketchfab.gui.roll_sketchfab.chkMakePrivate_save.checked
 							sketchfab.htmlpost.filenameModel = sketchfab.htmlpost.title + ".zip" --we're sending a zip-file. That's why the extension of the filename also needs to be .zip.
 							sketchfab.htmlpost.fileModel = sketchfab.htmlpost.title + sketchfab.exporter
