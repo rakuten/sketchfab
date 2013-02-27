@@ -95,8 +95,8 @@ Changelog:
 	
 -- 	local basePath = "//STRATUS/data/SketchfabExporter/Scripts/Version_07" --developing location1
 -- 	local basePath = "C:\Documents and Settings\klaas\My Documents\Downloads\Version_07\Version_07" --developing location2
--- 	local basepath = @"N:\GitHub\sketchfab"
-	local basePath = (getDir #userscripts) + "/KlaasTools/Sketchfab" --publishing location
+	local basepath = @"N:\GitHub\sketchfab"
+-- 	local basePath = (getDir #userscripts) + "/KlaasTools/Sketchfab" --publishing location
 	
 	struct str_sketchfab
 	(
@@ -130,7 +130,7 @@ Changelog:
 		memory = undefined, --used for memory diagnostics
 		scriptpath = "", --the path which stores the installed script
 		exporter = ".obj", --string representing the current exporter
-		version = 7.0,
+		version = 7.1,
 		hideTokenRollout = true
 	)
 	
@@ -156,7 +156,7 @@ Changelog:
 if (sketchfab.token.fn_getTokenFromIni sketchfab.token.iniPath) == "" do sketchfab.hideTokenRollout = false
 
 --putting these lines out of scope helps make the startup work and not crap out.
-sketchfab.gui.floater = newRolloutFloater "Publish to sketchfab 7.0" 264 408
+sketchfab.gui.floater = newRolloutFloater ("Publish to sketchfab " + sketchfab.version as string) 264 408
 addRollout sketchfab.gui.roll_sketchfab sketchfab.gui.floater rolledup:(not sketchfab.hideTokenRollout)
 addRollout sketchfab.gui.roll_TagDescription sketchfab.gui.floater rolledup:true
 addRollout sketchfab.gui.roll_token sketchfab.gui.floater rolledup:sketchfab.hideTokenRollout
