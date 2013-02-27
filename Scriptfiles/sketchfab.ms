@@ -95,8 +95,8 @@ Changelog:
 	
 -- 	local basePath = "//STRATUS/data/SketchfabExporter/Scripts/Version_07" --developing location1
 -- 	local basePath = "C:\Documents and Settings\klaas\My Documents\Downloads\Version_07\Version_07" --developing location2
-	local basepath = @"N:\GitHub\sketchfab"
--- 	local basePath = (getDir #userscripts) + "/KlaasTools/Sketchfab" --publishing location
+-- 	local basepath = @"N:\GitHub\sketchfab"
+	local basePath = (getDir #userscripts) + "/KlaasTools/Sketchfab" --publishing location
 	
 	struct str_sketchfab
 	(

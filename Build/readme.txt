@@ -5,12 +5,12 @@ If you want to check out the contents of the mzp-file yourself, you can unzip it
 A message from the developer
 	This script enables you to publish models directly to your sketchfab account on www.sketchfab.com.
 	License: GPL, http://opensource.org/licenses/gpl-3.0.html
-	Support: support@klaasnienhuis.nl
+	Support: sketchfab@klaasnienhuis.nl
 	Contact: twitter: klaasnienhuis, blog www.klaasnienhuis.nl
 
 name "Sketchfab"
 description "Klaas Nienhuis Scripts"
-version 7
+version 7.1
 
 The following files are copied to your system
 	scriptfiles\sketchfab.ms >> $userScripts\KlaasTools\Sketchfab\scriptfiles\

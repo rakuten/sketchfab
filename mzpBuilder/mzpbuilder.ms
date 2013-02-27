@@ -54,7 +54,7 @@ Changelog:
 	2 EDIT THIS FILEPATH (THEINIFILE) TO POINT TO YOUR OWN INI-FILE
 	3 THEN EXECUTE THIS FILE TO COMPILE YOUR MZP-FILE
 	***************************************************************************************************/
-	local theIniFile = @"N:\GitHub\augmentedev\mzpBuilder\mzpbuilder_list.ini"
+	local theIniFile = @"N:\GitHub\sketchfab\mzpBuilder\mzpbuilder_list.ini"
 
 	/***************************************************************************************************
 	DON'T EDIT THE STUFF BELOW, IT SHOULD WORK BY ITS OWN...

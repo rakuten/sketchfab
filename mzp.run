@@ -1,6 +1,6 @@
 name "Sketchfab"
 description "Klaas Nienhuis Scripts"
-version 7
+version 7.1
 
 copy "scriptfiles\sketchfab.ms" to "$userScripts\KlaasTools\Sketchfab\scriptfiles\"
 copy "scriptfiles\sketchfab_dae.ms" to "$userScripts\KlaasTools\Sketchfab\scriptfiles\"
