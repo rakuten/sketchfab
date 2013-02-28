@@ -22,68 +22,70 @@ Changelog:
 *******************************************************************************************************/
 
 (
-struct str_token 
-(
-	/*<STRUCT>
-	Description:
-		This struct contains methods to handle an ini-file with a token. The ini-file is created at first use
-		The user can then enter his token and it's stored in the ini-file.
-		There's no security whatsoever. the token is stored as text.
-	</STRUCT>*/
-	
-	iniPath = sketchfab.scriptpath + "/sketchfab.ini",
-	
-	function fn_getTokenFromIni iniPath =
+	struct str_token 
 	(
-		/*<FUNCTION>
+		/*<STRUCT>
 		Description:
-			Gets a tokenvalue from the inifile.
-		Arguments:
-			<string> iniPath: the path where the inifile should be		
-		Return:
-			<token> a tokenvalue.
-		</FUNCTION>*/
+			This struct contains methods to handle an ini-file with a token. The ini-file is created at first use
+			The user can then enter his token and it's stored in the ini-file.
+			There's no security whatsoever. the token is stored as text.
+		</STRUCT>*/
 		
-		local theToken = getINISetting iniPath "Sketchfab" "apitoken" 
-		theToken
-	),
-	
-	function fn_storeTokenInIni iniPath theToken:"" clearToken:false =
-	(
-		/*<FUNCTION>
-		Description:
-			Stores a token value in the inifile.
-		Arguments:
-			<string> iniPath: the path where the inifile should be		
-			<token> theToken: A tokenvalue
-			<boolean> clearToken: clears the token from the inifile
-		Return:
-			A new token has been stored
-		</FUNCTION>*/
+	 	iniPath = ((getDir #plugcfg) + "/sketchfab.ini"),
 		
-		if clearToken then theToken = ""
-		setINISetting iniPath "Sketchfab" "apitoken" theToken
-	),
-	
-	function fn_createTokenIni iniPath =
-	(
-		/*<FUNCTION>
-		Description:
-			Creates a new ini-file which is going to hold the token-value. This means the token 
-			doesn't need to be entered every session.
-		Arguments:
-			<string> iniPath: the path where the inifile should be
-		Return:
-			creates a new ini-file on disk if it doesn't exist already
-		</FUNCTION>*/
-		
-		if not doesFileExist iniPath do
+		function fn_getTokenFromIni iniPath =
 		(
-			makedir (getFilenamePath inipath)
-			setINISetting iniPath "Sketchfab" "apitoken" ""
+			/*<FUNCTION>
+			Description:
+				Gets a tokenvalue from the inifile.
+			Arguments:
+				<string> iniPath: the path where the inifile should be		
+			Return:
+				<token> a tokenvalue.
+			</FUNCTION>*/
+			
+			local theToken = getINISetting iniPath "Sketchfab" "apitoken" 
+			theToken
+		),
+		
+		function fn_storeTokenInIni iniPath theToken: clearToken:false =
+		(
+			/*<FUNCTION>
+			Description:
+				Stores a token value in the inifile.
+			Arguments:
+				<string> iniPath: the path where the inifile should be		
+				<token> theToken: A tokenvalue
+				<boolean> clearToken: clears the token from the inifile
+			Return:
+				A new token has been stored
+			</FUNCTION>*/
+			
+			if clearToken then theToken = ""
+			if theToken != unsupplied do setINISetting iniPath "Sketchfab" "apitoken" theToken
+		),
+		
+		function fn_createTokenIni iniPath =
+		(
+			/*<FUNCTION>
+			Description:
+				Creates a new ini-file which is going to hold the token-value. This means the token 
+				doesn't need to be entered every session.
+			Arguments:
+				<string> iniPath: the path where the inifile should be
+			Return:
+				creates a new ini-file on disk if it doesn't exist already
+			</FUNCTION>*/
+	-- 		mapPaths.getFullFilePath
+			print "Calling fn_createTokenIni"
+			if not (doesFileExist iniPath) do
+			(
+				print "Creating token INI file"
+	-- 			makedir (getFilenamePath inipath)
+				setINISetting iniPath "Sketchfab" "apitoken" ""
+			)
 		)
 	)
-)
 
 --load the struct into the main script-struct
 sketchfab.token = str_token()
