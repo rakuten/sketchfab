@@ -95,8 +95,8 @@ Changelog:
 	
 -- 	local basePath = "//STRATUS/data/SketchfabExporter/Scripts/Version_07" --developing location1
 -- 	local basePath = "C:\Documents and Settings\klaas\My Documents\Downloads\Version_07\Version_07" --developing location2
--- 	local basepath = @"N:\GitHub\sketchfab"
-	local basePath = (getDir #userscripts) + "/KlaasTools/Sketchfab" --publishing location
+	local basepath = @"N:\GitHub\sketchfab"
+-- 	local basePath = (getDir #userscripts) + "/KlaasTools/Sketchfab" --publishing location
 	
 	struct str_sketchfab
 	(
@@ -125,7 +125,9 @@ Changelog:
 		guiIni =  basePath + "/rolloutSettings.ini", --settings regarding the gui
 		thumbnailPath =  basePath + "/art/sketchfabBanner_007.jpg",
 		startTime = undefined,
-
+-- 		tokenIni = ((getDir #plugcfg) + "/sketchfab.ini"),
+		
+		
 		chainThreads = true, --if set to true, all threads are executed one after another. If set to false, each thread needs to be executed individually
 		memory = undefined, --used for memory diagnostics
 		scriptpath = "", --the path which stores the installed script
@@ -149,6 +151,10 @@ Changelog:
 
 
 )
+
+--create the token from the ini
+sketchfab.token.fn_createTokenIni sketchfab.token.iniPath
+
 
 --setup the rollout-states depending on the presence of a token in the ini-file
 --if there's no token yet, the token-rollout will be the only one open. this prompts the user to provide the token 
