@@ -100,8 +100,7 @@ Changelog:
 					sketchfab.myRollloutFunctions.loadFloaterPosition sketchfab.gui.floater sketchfab.guiIni
 					sketchfab.myRollloutFunctions.loadControlSettings sketchfab.gui.roll_sketchfab sketchfab.guiIni
 					
-					--create the token from the ini
-					sketchfab.token.fn_createTokenIni sketchfab.token.iniPath
+-- 					--get the token from the ini and put it in the gui
 					sketchfab.htmlpost.token = sketchfab.token.fn_getTokenFromIni sketchfab.token.iniPath
 					
 					--init the tooltips
@@ -191,6 +190,9 @@ Changelog:
 							sketchfab.memory = heapfree	
 							
 							--store variables which need to be posted to the server
+							local theToken = trimleft sketchfab.gui.roll_token.txtToken.text
+							theToken = trimright theToken
+							sketchfab.htmlpost.token = theToken
 							sketchfab.htmlpost.title = sketchfab.gui.roll_sketchfab.txtTitle_save.text
 							sketchfab.htmlpost.description = sketchfab.gui.roll_TagDescription.txtDescription_save.text
 							sketchfab.htmlpost.tags = sketchfab.gui.roll_TagDescription.txtTags_save.text + " 3dsMaxPublisher" --add my own tag
@@ -244,6 +246,7 @@ Changelog:
 			(
 				dotnetcontrol txtToken "textbox" width:224
 				checkbox chkShowToken "Show token" checked:false offset:[0,6] tooltip:"Show the characters of the token, just to check it."
+				button btnManualToken "Token not working? Enter it manually here..." tooltip:"If the token doesn't seem to work even if it's correct, try entering it in the storagefile yourself"
 				
 				on roll_token open do
 				(
@@ -265,6 +268,12 @@ Changelog:
 				on chkShowToken changed arg do
 				(
 					sketchfab.gui.roll_token.txtToken.useSystemPasswordChar = (not sketchfab.gui.roll_token.chkShowToken.checked)
+				)
+				
+				on btnManualToken pressed do
+				(
+					sketchfab.token.fn_createTokenIni sketchfab.token.iniPath
+					ShellLaunch "notepad.exe" sketchfab.token.iniPath
 				)
 			)			
 		),
