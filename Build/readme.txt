@@ -10,7 +10,7 @@ A message from the developer
 
 name "Sketchfab"
 description "Klaas Nienhuis Scripts"
-version 7.1
+version 7.3
 
 The following files are copied to your system
 	scriptfiles\sketchfab.ms >> $userScripts\KlaasTools\Sketchfab\scriptfiles\

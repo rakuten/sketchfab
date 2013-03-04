@@ -246,16 +246,27 @@ Changelog:
 			(
 				dotnetcontrol txtToken "textbox" width:224
 				checkbox chkShowToken "Show token" checked:false offset:[0,6] tooltip:"Show the characters of the token, just to check it."
-				button btnManualToken "Token not working? Enter it manually here..." tooltip:"If the token doesn't seem to work even if it's correct, try entering it in the storagefile yourself"
+				dotnetcontrol btnManualToken "Button" width:224 height:40 offset:[0,2]
+
+-- 				button btnManualToken "Token not working? Enter it manually here
+-- 				and restart script afterwards..." height:35 tooltip:"If the token doesn't seem to work even if it's correct, try entering it in the storagefile yourself"
 				
 				on roll_token open do
 				(
+					--style the send-button
+					local theButton = sketchfab.gui.roll_token.btnManualToken
+-- 					theButton.flatStyle = theButton.flatStyle.flat
+-- 					theButton.backColor = (dotnetclass "system.drawing.color").FromArgb 14 116 0
+-- 					theButton.foreColor = (dotnetclass "system.drawing.color").FromArgb 255 255 255
+					theButton.text = "Token not working? Click button to enter directly in file. Restart script afterwards."
+					
 					--display the tokenvalue in the rollout
 					sketchfab.gui.roll_token.txtToken.text = sketchfab.token.fn_getTokenFromIni sketchfab.token.iniPath
 					sketchfab.gui.roll_token.txtToken.useSystemPasswordChar = (not sketchfab.gui.roll_token.chkShowToken.checked)
 					
 					--init the tooltips
 					sketchfab.gui.ToolTipObj.SetToolTip sketchfab.gui.roll_token.txtToken "Enter your token here. You need it to publish to your account. \nGet your token from your dashboard on Sketchfab"
+					sketchfab.gui.ToolTipObj.SetToolTip sketchfab.gui.roll_token.btnManualToken "If the token doesn't seem to work even if it's correct,\ntry entering it in the storagefile yourself"
 					
 				)
 				
@@ -270,7 +281,7 @@ Changelog:
 					sketchfab.gui.roll_token.txtToken.useSystemPasswordChar = (not sketchfab.gui.roll_token.chkShowToken.checked)
 				)
 				
-				on btnManualToken pressed do
+				on btnManualToken mouseclick do
 				(
 					sketchfab.token.fn_createTokenIni sketchfab.token.iniPath
 					ShellLaunch "notepad.exe" sketchfab.token.iniPath
