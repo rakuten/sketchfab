@@ -21,6 +21,7 @@ Changelog:
 	2012-10-04: edited the flow of threading. The base64 has been ditched in the new API. The model, mtl-file and textures are zipped together with a json-file.
 	2012-10-11: cleaned out some methods due to the simplification of the submitting process
 	2012-10-17: replaced all json-entries with htmlpost entries
+	2013-03-04: renamed struct members to ensure compatibility with 3dsMax 2014
 </SCRIPTFILE>
 *******************************************************************************************************/
 
@@ -188,9 +189,9 @@ struct str_multithreading
 		if theTread.IsBusy do theTread.CancelAsync()		
 	),
 	
-	init = fn_initExportThread exportThread,
-	init = fn_initZipThread zipThread,
-	init = fn_initpostHtmlThread postHtmlThread
+	init1 = fn_initExportThread exportThread,
+	init2 = fn_initZipThread zipThread,
+	init3 = fn_initpostHtmlThread postHtmlThread
 	
 )
 sketchfab.thread = str_multithreading()
